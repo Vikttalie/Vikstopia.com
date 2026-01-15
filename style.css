@@ -1,0 +1,101 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { 
+    background-color: #000;
+    min-height: 100vh; 
+    font-family: 'Courier New', Courier, monospace;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.admin-only { display: none !important; }
+body.is-admin .admin-only { display: inline-block !important; }
+body.is-admin .btn-config-flotante.admin-only { display: block !important; }
+
+#fondo-overlay { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    z-index: -1; pointer-events: none; 
+    background-color: #000;
+}
+
+header { 
+    /* El color de fondo se define ahora en JS, pero dejamos un default */
+    background-color: #bca89d; 
+    padding: 10px 2%; 
+    display: flex; justify-content: space-between; align-items: center; 
+    border-bottom: 2px solid #333; /* Borde más fino para ser elegante */
+    position: sticky; top: 0; z-index: 1000; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+/* --- ESTILO NUEVO DE BOTONES (TIPO IMAGEN ADJUNTA) --- */
+.tab-link, .btn-nuevo, .btn-config-flotante, .btn-guardar, .btn-enviar, .btn-cerrar {
+    /* Degradado de gris claro a gris oscuro */
+    background: linear-gradient(to bottom, #f7f7f7 0%, #dcdcdc 100%);
+    border: 1px solid #666; /* Borde fino gris oscuro */
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 6px 18px;
+    
+    /* Fuente Sans-serif para que se vea como en la imagen */
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+    text-shadow: 0 1px 0 #fff; /* Brillo en el texto */
+    
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 #fff, 0 2px 2px rgba(0,0,0,0.2); /* Brillo interior y sombra suave */
+    transition: all 0.1s;
+    margin: 0 2px;
+}
+
+/* Efecto Hover (pasar el mouse) */
+.tab-link:hover, .btn-nuevo:hover { 
+    background: linear-gradient(to bottom, #ffffff 0%, #eeeeee 100%);
+    box-shadow: inset 0 1px 0 #fff, 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+/* Efecto Active (Botón seleccionado o presionado) */
+.tab-link.active, .tab-link:active { 
+    background: #cccccc; /* Gris plano más oscuro */
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); /* Sombra interior para parecer presionado */
+    color: #000;
+}
+
+/* --- FIN ESTILO BOTONES --- */
+
+.decoracion-banner { 
+    height: 180px; border-bottom: 4px solid #1a1a1a;
+    display: flex; justify-content: center; align-items: center; 
+    font-size: 28px; font-weight: bold; color: white;
+    background-color: #333; background-size: cover; background-position: center;
+    text-shadow: 2px 2px 4px #000;
+}
+
+/* Control de Secciones */
+.section { display: none; padding-bottom: 50px; }
+.section.active { display: block; }
+
+.card-exterior { 
+    background: #f0f0f0; border: 4px solid #1a1a1a; border-radius: 40px;
+    padding: 25px; margin: 30px auto; max-width: 850px; display: flex; gap: 20px;
+    box-shadow: 10px 10px 0px #000; position: relative;
+}
+
+.avatar-circulo { width: 80px; height: 80px; border-radius: 50%; border: 3px solid #1a1a1a; overflow: hidden; background: white; }
+.avatar-circulo img { width: 100%; height: 100%; object-fit: cover; }
+
+.card-interior { background: #d1d1d1; border: 3px solid #1a1a1a; border-radius: 30px; flex: 1; overflow: hidden; }
+.post-header { background: #2b2b2b; color: white; padding: 10px 20px; display: flex; justify-content: space-between; font-size: 14px; }
+
+.btn-config-flotante { position: fixed; bottom: 20px; left: 20px; z-index: 1500; }
+.modal-fondo { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2000; }
+.modal-box { background:white; padding:30px; border:4px solid #000; border-radius:30px; margin:5% auto; width:90%; max-width:450px; }
+.modal-box input, .modal-box textarea { width: 100%; margin: 8px 0; padding: 10px; border: 2px solid #000; border-radius: 10px; font-family: inherit; }
+
+.admin-btns { position: absolute; top: -10px; right: 20px; background: white; border: 2px solid #000; border-radius: 10px; padding: 5px; display: flex; gap: 5px; z-index: 10; }
+.admin-btns button { border: none; background: none; cursor: pointer; font-size: 18px; }
+
+.chat-display { height: 300px; overflow-y: auto; padding: 10px; background: #fff; border-radius: 20px; margin: 10px; border: 2px solid #000; }
+.msg-bubble { background:#eee; margin-bottom:10px; padding:10px; border-radius:15px; border:1px solid #000; }

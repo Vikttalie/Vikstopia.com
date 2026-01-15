@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vikttalie | Blog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="fondo-overlay"></div>
+
+    <header id="main-header">
+        <nav id="menu-principal">
+            <a onclick="tab(event, 'inicio')" class="tab-link active">Inicio</a>
+            <a onclick="tab(event, 'noticias')" class="tab-link">Noticias</a>
+            <a onclick="tab(event, 'proyectos')" class="tab-link">Proyectos</a>
+            <a onclick="tab(event, 'arte')" class="tab-link">Mi arte</a>
+            <a onclick="tab(event, 'comentarios')" class="tab-link">Comentarios</a>
+            <a onclick="tab(event, 'acerca')" class="tab-link">Acerca de mí</a>
+        </nav>
+        <div class="nav-right">
+            <button onclick="abrirEditorPost()" class="btn-nuevo admin-only">+ Nuevo Post</button>
+            <a class="tab-link admin-only">Admin</a>
+        </div>
+    </header>
+
+    <div id="banner-seccion" class="decoracion-banner">INICIO</div>
+
+    <main class="contenedor-principal">
+        <section id="inicio" class="section active"><div id="feed-inicio"></div></section>
+        <section id="noticias" class="section"><div id="feed-noticias"></div></section>
+        <section id="proyectos" class="section"><div id="feed-proyectos"></div></section>
+        <section id="arte" class="section"><div id="feed-arte"></div></section>
+        <section id="acerca" class="section"><div id="feed-acerca"></div></section>
+        
+        <section id="comentarios" class="section">
+            <div class="card-exterior">
+                <div class="card-interior">
+                    <div class="chat-header" style="background:#2b2b2b; color:white; padding:10px; text-align:center;">Chat de la comunidad</div>
+                    <div id="chat-box" class="chat-display"></div>
+                    <div class="chat-controles" style="padding:10px; display:flex; gap:5px;">
+                        <input type="text" id="chat-input" placeholder="Escribe un mensaje..." style="flex:1; border-radius:10px; padding:5px;">
+                        <button onclick="enviarChat()" class="btn-enviar">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button onclick="toggleModalPerfil(true)" class="btn-config-flotante admin-only">⚙️ Configurar Diseño</button>
+
+    <div id="modal-perfil" class="modal-fondo">
+        <div class="modal-box">
+            <h3>Panel de Control</h3>
+            <div class="pestañas-config">
+                <button onclick="verTabConfig('p-perfil')">Perfil</button>
+                <button onclick="verTabConfig('p-diseño')">Diseño</button>
+            </div>
+            <div id="p-perfil" class="config-content">
+                <label>Tu Nombre:</label><input type="text" id="perfil-nombre">
+                <label>Foto Perfil (URL):</label><input type="text" id="perfil-img">
+                <button onclick="cerrarSesion()" class="btn-logout" style="margin-top:15px; background:#ff4444; color:white; border:none; border-radius:15px; padding:8px; cursor:pointer; width:100%;">Cerrar Sesión Admin</button>
+            </div>
+            <div id="p-diseño" class="config-content" style="display:none;">
+                <label style="color: blue; font-weight: bold;">🎨 Color Barra Navegación:</label>
+                <input type="color" id="cfg-color-nav" value="#bca89d" style="width: 100%; height: 40px; cursor: pointer; border: 2px solid black; border-radius: 10px;">
+                <hr style="margin:15px 0; border:1px solid #ccc;">
+
+                <label>Fondo de Web (URL):</label>
+                <input type="text" id="cfg-fondo-web">
+                <label>Opacidad del Fondo:</label>
+                <input type="range" id="cfg-op-fondo" min="0" max="1" step="0.1">
+                <hr style="margin:15px 0; border:1px dashed #ccc;">
+                <label>Banner de esta Sección (URL):</label>
+                <input type="text" id="cfg-banner-secc">
+                <label>Opacidad del Banner:</label>
+                <input type="range" id="cfg-op-banner" min="0" max="1" step="0.1">
+            </div>
+            <div class="fila-botones">
+                <button onclick="guardarTodoConfig()" class="btn-guardar">Guardar</button>
+                <button onclick="toggleModalPerfil(false)" class="btn-cerrar">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-post" class="modal-fondo">
+        <div class="modal-box">
+            <h3>Publicación</h3>
+            <input type="text" id="post-titulo" placeholder="Título del post">
+            <textarea id="post-texto" placeholder="Escribe aquí..." style="height:100px;"></textarea>
+            <input type="text" id="post-url" placeholder="URL de imagen (opcional)">
+            
+            <label style="display:block; margin-top:10px; font-weight:bold;">Publicar en:</label>
+            <select id="post-seccion-destino" style="width:100%; padding:8px; border-radius:10px; border:2px solid #000; margin-bottom:15px;">
+                <option value="inicio">Inicio</option>
+                <option value="noticias">Noticias</option>
+                <option value="proyectos">Proyectos</option>
+                <option value="arte">Mi arte</option>
+                <option value="acerca">Acerca de mí</option>
+            </select>
+
+            <div class="fila-botones">
+                <button onclick="guardarPost()" class="btn-guardar">Publicar</button>
+                <button onclick="cerrarEditorPost()" class="btn-cerrar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
